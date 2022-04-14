@@ -1,0 +1,40 @@
+[user]
+	name = Fernando Beck
+	email = fe.beck25@gmail.com
+
+[pull]
+	rebase = true
+[branch]
+	autoSetupMerge = always
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+  amend = commit -a --amend --no-edit
+  undo = reset HEAD~1 --mixed
+  # Shows branches and last time they were modified
+  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+
+[push]
+  default = current # allow git push from any branch without needing git push origin branch_name
+
+[core]
+  pager = delta
+  excludesfile = /Users/fernandobeck/.gitignore_global
+	editor = code --wait
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+
+[init]
+	defaultBranch = main
