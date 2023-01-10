@@ -1,7 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-export PATH="${PATH}:${HOME}/.local/bin"
-eval "$(fig init zsh pre)"
-
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/fernandobeck/.oh-my-zsh
 
@@ -53,14 +51,19 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colorize github brew z zsh-autosuggestions)
+plugins=(git colorize github brew z)
 
 # User configuration
 
-export PATH="/Users/fernandobeck/.nvm/versions/node/v6.10.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin"
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -87,6 +90,9 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="code ~/.zshrc"
 alias gitconfig="code ~/.gitconfig"
 
+# Evalutating Brew must be made after other shit is initialized...
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Boot starship
 eval "$(starship init zsh)"
 
@@ -96,6 +102,10 @@ DEFAULT_USER=fernandobeck
 # Init mcfly, similar to ctrl+r for searching in history https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
 
-# Fig post block. Keep at the bottom of this file.
-eval "$(fig init zsh post)"
+. "$HOME/.cargo/env"
 
+# Hack to try and access ffmpeg v4 (v5 is default)
+export PATH="/opt/homebrew/opt/ffmpeg@4/bin:$PATH"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
