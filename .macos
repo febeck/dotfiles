@@ -41,6 +41,7 @@ fzf \
 # gh: GitHub command-line tool
 gh \
 # git-delta: Git diffs with color-highlighting and more
+git-delta \
 git \
 # imagemagick: eventually I will need this for something
 imagemagick \
